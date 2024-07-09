@@ -75,17 +75,23 @@
 
 ![img.png](src/main/img/buscarLibroPorTitulo.png)
 
-### Menú 2 Listar libros registrados
+#### Cuando no se encuentre el titulo
+
+![img.png](src/main/img/cuandoNoSeEncuentreTitulo.png)
+
+### Menú 2 Listar libros registrados en la BD
 
 
-### Menú 3 Listar autores registrados
+### Menú 3 Listar autores registrados en la BD
 
-### Menú 4 Listar autores vivos en determinado año
+### Menú 4 Listar autores vivos en determinado año en la BD
 
 
-### Menú 5 Listar libros por idioma
+### Menú 5 Listar libros por idioma de la BD
 
 ### Menú 8 Salir
+
+![img.png](src/main/img/despedida.png)
 
 
 ### Dependencias Gson:

@@ -1,7 +1,18 @@
 package com.alura.challenge.challengeLiteratura.principal;
 
+import com.alura.challenge.challengeLiteratura.model.Datos;
+import com.alura.challenge.challengeLiteratura.repository.AutorRepository;
 import com.alura.challenge.challengeLiteratura.service.ConsumoAPI;
+import com.alura.challenge.challengeLiteratura.service.ConvierteDatos;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Scanner;
 
 public class Opciones {
@@ -20,18 +31,45 @@ public class Opciones {
         System.out.print("Ingrese su opción: ");
     }
 
-    public void buscarPorTitulo() {
+    public void buscarPorTitulo() throws IOException {
         this.encabezadoBuscarPorTitulo();
         this.recibirTitulo();
 
     }
 
-    private void recibirTitulo() {
+    private void recibirTitulo() throws IOException {
+        String URL_BASE = "https://gutendex.com/books/?search=";
         Scanner scanner = new Scanner(System.in);
         String titulo = scanner.nextLine();
         ConsumoAPI api = new ConsumoAPI();
-        api.obtenerDatos(titulo);
+        ConvierteDatos conversor = new ConvierteDatos();
+        System.out.println("⌛ Buscando...."+ titulo);
 
+        var json = api.obtenerDatos(URL_BASE + titulo.replace(" ", "+").toLowerCase());
+        //System.out.println(json);
+        var datos = conversor.obtenerDatos(json, Datos.class);
+        //System.out.println(datos);
+        // validar si existen libros
+
+        // Accessing object
+        Integer cuenta = datos.total();
+        if (cuenta > 0) {
+            System.out.println("\uD83D\uDE03 Se encotraron "+cuenta+" titulos que contienen "+ titulo);
+            this.muestraTitulosEncontrados();
+            this.guardarEnBD();
+        }
+        else{
+            System.out.println("\uD83D\uDE41 lo sentimos, no se encontró ningún libro llamado: "+ titulo);
+        }
+
+    }
+
+    private void guardarEnBD() {
+        System.out.println("Guardando en BD los titulos encontrados");
+    }
+
+    private void muestraTitulosEncontrados() {
+        System.out.println("Listado de Titulos encontrados");
     }
 
     private void encabezadoBuscarPorTitulo() {
