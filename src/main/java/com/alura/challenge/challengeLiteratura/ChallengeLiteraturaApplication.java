@@ -20,8 +20,6 @@ public class ChallengeLiteraturaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Principal principal = new Principal(repository);
-
-
 		try {
 			principal.mostrarMenu();
 		} catch (Exception e) {

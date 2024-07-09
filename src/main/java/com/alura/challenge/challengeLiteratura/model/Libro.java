@@ -2,6 +2,7 @@ package com.alura.challenge.challengeLiteratura.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -87,5 +88,18 @@ public class Libro {
                 ", descargas=" + descargas +
                 ", autor=" + autor +
                 "\n-----------------------------------\n";
+    }
+
+
+    public void setTitle(String titulo) {
+    }
+
+    public void setLanguages(String idiomas) {
+    }
+
+    public void setDownloadCount(Integer descargas) {
+    }
+
+    public void setAutores(Set<Autor> autores) {
     }
 }

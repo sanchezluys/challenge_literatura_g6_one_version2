@@ -1,15 +1,15 @@
 
-![img.png](src/main/img/logo_alura.png)
+![img.png](src/main/img/logoAlura.png)
 
 # JAVA SDK 17 + Intellij IDEA
-## Challenge Literatura G6 One
+## Challenge Literatura G6 One Version 2
 ### Profesores: Bruno Fernández / Genesys Rondon / Eric Fraga
 
 <hr>
 
 ![Static Badge](https://img.shields.io/badge/Lenguaje-Java%2017-blue)  ![Static Badge](https://img.shields.io/badge/Versi%C3%B3n-Beta-Yellow)  <label><img src="https://img.shields.io/badge/Estatus-En%20Desarrollo-green"></label>
 <hr>
-    <img src="src/main/img/logo_java.jpg" alt="Logo Java" width="150px">
+    <img src="src/main/img/logoJava.png" alt="Logo Java" width="150px">
 <hr>
 
 
@@ -52,11 +52,11 @@
 
 ### Menú Principal
 
-![img.png](src/main/img/menu_principal.png)
+![img.png](src/main/img/menuPrincipal.png)
 
 ### Menú 1 Buscar Libro por titulo
 
-![img.png](src/main/img/buscar_libro_por_titulo.png)
+![img.png](src/main/img/buscarLibroPorTitulo.png)
 
 ### Menú 2 Listar libros registrados
 
@@ -71,10 +71,14 @@
 ### Menú 8 Salir
 
 
-### Dependencias:
+### Dependencias Gson:
 
     <dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.11.0</version>
     </dependency>
+
+### Diagrama Entidad Relación en Postgresql
+
+![img.png](src/main/img/diagramaEntidadRelacion.png)

@@ -22,6 +22,6 @@ public enum Idioma {
                 return idioma;
             }
         }
-        throw new IllegalArgumentException("No constant with text " + text + " found");
+        throw new IllegalArgumentException("Enum no encontrado " + text );
     }
 }
