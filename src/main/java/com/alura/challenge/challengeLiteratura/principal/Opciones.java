@@ -1,18 +1,9 @@
 package com.alura.challenge.challengeLiteratura.principal;
 
 import com.alura.challenge.challengeLiteratura.model.Datos;
-import com.alura.challenge.challengeLiteratura.repository.AutorRepository;
 import com.alura.challenge.challengeLiteratura.service.ConsumoAPI;
 import com.alura.challenge.challengeLiteratura.service.ConvierteDatos;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Scanner;
 
 public class Opciones {
