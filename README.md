@@ -18,9 +18,6 @@
 | Item | Descripción                                     | Observación |
 |------|-------------------------------------------------|-------------|
 | 1.   | Se respetará el mismo menu del trello           |             |
-|      |                                                 |             |
-|      |                                                 |             |
-|      |                                                 |             |
 | 2.   | La API a usar será la recomendada en el trello. |             |
 |      | http://gutendex.com/                            |             |
 
@@ -39,16 +36,36 @@
 
 ### Clases
 
-| Item | Descripción | Observación | Tipo |
-|------|-------------|-------------|------|
-| 1    |             |             |      |
-| 2    |             |             |      |
-| 3    |             |             |      |
-|      |             |             |      |
-| 4    |             |             |      |
-| 5    |             |             |      |
-|      |             |             |      |
-|      |             |             |      |
+| Item         | Descripción            | Observación | Tipo |
+|--------------|------------------------|-------------|------|
+| Modelos      |                        |             |      |
+| 1            | Autor                  |             |      |
+| 2            | Datos                  |             |      |
+| 3            | DatosAutor             |             |      |
+| 4            | DatosLibro             |             |      |
+| 5            | Idioma                 |             |      |
+| 6            | Libro                  |             |      |
+|              |                        |             |      |
+| Principal    |                        |             |      |
+| 1            | Opciones               |             |      |
+| 2            | Principal              |             |      |
+|              |                        |             |      |
+| Repositorio  |                        |             |      |
+| 1            | AutorRepository        |             |      |
+|              |                        |             |      |
+| Servicio     |                        |             |      |
+| 1            | ConsumoAPI             |             |      |
+| 2            | ConvierteDatos         |             |      |
+| 3            | IConvierteDatos        |             |      |
+|              |                        |             |      |
+| Main         |                        |             |      |
+| 1            | ChallengeLiteratura    |             |      |
+|              |                        |             |      |
+| Recursos     |                        |             |      |
+| 1            | application.properties |             |      |
+|              |                        |             |      |
+| Dependencias |                        |             |      |
+| 1            | pom.xml                |             |      |
 
 ### Menú Principal
 
