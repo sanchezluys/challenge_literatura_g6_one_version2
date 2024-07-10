@@ -2,6 +2,7 @@ package com.alura.challenge.challengeLiteratura.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -102,4 +103,14 @@ public class Libro {
 
     public void setAutores(Set<Autor> autores) {
     }
+
+    public List<Autor> getAuthors() {
+        return (List<Autor>) autor;
+    }
+
+    public void setAuthors(List<Autor> authors) {
+        this.autor = autor;
+    }
+
+
 }

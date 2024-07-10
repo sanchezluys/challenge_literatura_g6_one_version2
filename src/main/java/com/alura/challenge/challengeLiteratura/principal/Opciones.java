@@ -1,12 +1,23 @@
 package com.alura.challenge.challengeLiteratura.principal;
 
+import com.alura.challenge.challengeLiteratura.model.Autor;
 import com.alura.challenge.challengeLiteratura.model.Datos;
+import com.alura.challenge.challengeLiteratura.model.DatosLibro;
+import com.alura.challenge.challengeLiteratura.model.Libro;
 import com.alura.challenge.challengeLiteratura.service.ConsumoAPI;
 import com.alura.challenge.challengeLiteratura.service.ConvierteDatos;
+
+
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Opciones {
+
+
+
 
     public void muestra() {
         System.out.println("╔══════════════════════════════════════════════════════════╗");
@@ -34,34 +45,53 @@ public class Opciones {
         String titulo = scanner.nextLine();
         ConsumoAPI api = new ConsumoAPI();
         ConvierteDatos conversor = new ConvierteDatos();
-        System.out.println("⌛ Buscando...."+ titulo);
-
+        System.out.println("⌛ Buscando...." + titulo);
         var json = api.obtenerDatos(URL_BASE + titulo.replace(" ", "+").toLowerCase());
-        //System.out.println(json);
         var datos = conversor.obtenerDatos(json, Datos.class);
-        //System.out.println(datos);
-        // validar si existen libros
-
-        // Accessing object
         Integer cuenta = datos.total();
         if (cuenta > 0) {
-            System.out.println("\uD83D\uDE03 Se encotraron "+cuenta+" titulos que contienen "+ titulo);
-            this.muestraTitulosEncontrados();
-            this.guardarEnBD();
+            System.out.println("\uD83D\uDE03 Se encotraron " + (cuenta - 1) + " titulos mas que contienen " + titulo + " en su nombre ");
+            Optional<DatosLibro> libroBuscado = datos.libros().stream()
+                    .findFirst();
+            this.muestraLibro(libroBuscado);
+            this.guardarEnBD(libroBuscado, titulo);
+        } else {
+            System.out.println("\uD83D\uDE41 lo sentimos, no se encontró ningún libro llamado: " + titulo);
         }
-        else{
-            System.out.println("\uD83D\uDE41 lo sentimos, no se encontró ningún libro llamado: "+ titulo);
+
+    }
+
+    private void muestraLibro(Optional<DatosLibro> libroBuscado) {
+        List<Libro> libroEncontrado = libroBuscado.stream().map(a -> new Libro(a)).collect(Collectors.toList());
+        System.out.println(libroEncontrado);
+    }
+
+
+    private void guardarEnBD(Optional<DatosLibro> libroBuscado, String nombre) {
+        System.out.println("Guardando en BD el titulo encontrado...");
+        try {
+            List<Libro> libroEncontrado = libroBuscado.stream().map(a -> new Libro(a)).collect(Collectors.toList());
+            Autor autorAPI = libroBuscado.stream().
+                    flatMap(l -> l.autores()
+                            .stream()
+                            .map(a -> new Autor(a)))
+                    .collect(Collectors.toList())
+                    .stream().findFirst()
+                    .get();
+            //
+//            Optional<Autor> autorBD = repository.buscarAutorPorNombre(
+//                    libroBuscado.get().
+//                            autores().stream()
+//                            .map(a -> a.nombre())
+//                            .collect(Collectors.joining()));
+
+            //System.out.println(autorBD);
+
+        } catch (Exception e) {
+            System.out.println("Error! " + e.getMessage());
         }
-
     }
 
-    private void guardarEnBD() {
-        System.out.println("Guardando en BD los titulos encontrados");
-    }
-
-    private void muestraTitulosEncontrados() {
-        System.out.println("Listado de Titulos encontrados");
-    }
 
     private void encabezadoBuscarPorTitulo() {
         System.out.println("╔════════════════════════════════════════════════════════╗");
@@ -133,7 +163,8 @@ public class Opciones {
         System.out.println("╠════════════════════════════════════════════════════════╣");
         System.out.println("║ Muchas gracias por usar esta Aplicacion de Literarura  ║");
         System.out.println("║ Nos vemos pronto!!                                     ║");
-        System.out.println("╚════════════════════════════════════════════════════════╝");;
+        System.out.println("╚════════════════════════════════════════════════════════╝");
+        ;
     }
 
     public void encabezado() {
