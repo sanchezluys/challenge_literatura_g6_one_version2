@@ -73,7 +73,7 @@
 
 ### Menú 1 Buscar Libro por titulo
 
-![img.png](src/main/img/buscarLibroPorTitulo.png)
+![img.png](src/main/img/buscarLibroTitulo.png)
 
 #### Cuando no se encuentre el titulo
 
@@ -81,11 +81,13 @@
 
 ### Menú 2 Listar libros registrados en la BD
 
+![img.png](src/main/img/listarLibrosEnBD.png)
 
 ### Menú 3 Listar autores registrados en la BD
 
-### Menú 4 Listar autores vivos en determinado año en la BD
+![img.png](src/main/img/listadoAutoresBD.png)
 
+### Menú 4 Listar autores vivos en determinado año en la BD
 
 ### Menú 5 Listar libros por idioma de la BD
 
@@ -105,3 +107,21 @@
 ### Diagrama Entidad Relación en Postgresql
 
 ![img.png](src/main/img/diagramaEntidadRelacion.png)
+
+### Mejoras y bugs pendientes por corregir
+
+| Item | Tipo   | Descripción                                                           | Propuesta                                            |
+|------|--------|-----------------------------------------------------------------------|------------------------------------------------------|
+| 1    | Mejora | Mostrar el idioma completo                                            | En vez de EN mostrar Ingles usando los alias en ENUM |
+|      |        |                                                                       |                                                      |
+| 2    | Bug    | Cuando un idioma o dato sea null                                      | Crear control para excepciones de este tipo          |
+|      |        |                                                                       |                                                      |
+| 3    | Bug    | Cuando el nombre del libro es mayor a 255 carateres da error          | Revisar los tipos de datos y actualizar              |
+|      |        |                                                                       |                                                      |
+| 4    | Mejora | Cuando un dato sea null cambiar por "Sin Informacion"                 | Agregar logica u código                              |
+|      |        |                                                                       |                                                      |
+| 5    | Mejora | Revisar Ortografia de todo el proyecto                                |                                                      |
+|      |        |                                                                       |                                                      |
+| 6    | Bug    | Agregar todos los Eumns de idiomas, al no extistir da error           | agregar excepcion cuando no exista el enum           |
+|      |        |                                                                       |                                                      |
+| 7    | Mejora | Colocar en los listado un numero consecutivo, al final decir el total |                                                      |

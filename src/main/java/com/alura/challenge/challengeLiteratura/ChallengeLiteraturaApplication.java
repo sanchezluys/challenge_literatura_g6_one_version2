@@ -19,9 +19,10 @@ public class ChallengeLiteraturaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal principal = new Principal(repository);
+
+		Principal principal = new Principal();
 		try {
-			principal.mostrarMenu();
+			principal.mostrarMenu(repository);
 		} catch (Exception e) {
 			// Handle the exception here
 			System.out.println("Ocurrió un error: " + e.getMessage());

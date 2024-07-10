@@ -4,6 +4,7 @@ public enum Idioma {
     ES("es"),
     FR("fr"),
     EN("en"),
+    TL("tl"),
     PT("pt");
 
     private String idioma;

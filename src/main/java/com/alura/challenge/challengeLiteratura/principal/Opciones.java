@@ -4,6 +4,7 @@ import com.alura.challenge.challengeLiteratura.model.Autor;
 import com.alura.challenge.challengeLiteratura.model.Datos;
 import com.alura.challenge.challengeLiteratura.model.DatosLibro;
 import com.alura.challenge.challengeLiteratura.model.Libro;
+import com.alura.challenge.challengeLiteratura.repository.AutorRepository;
 import com.alura.challenge.challengeLiteratura.service.ConsumoAPI;
 import com.alura.challenge.challengeLiteratura.service.ConvierteDatos;
 
@@ -15,9 +16,6 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Opciones {
-
-
-
 
     public void muestra() {
         System.out.println("╔══════════════════════════════════════════════════════════╗");
@@ -33,13 +31,14 @@ public class Opciones {
         System.out.print("Ingrese su opción: ");
     }
 
-    public void buscarPorTitulo() throws IOException {
+    public void buscarPorTitulo(AutorRepository repository) throws IOException {
+
         this.encabezadoBuscarPorTitulo();
-        this.recibirTitulo();
+        this.recibirTitulo(repository);
 
     }
 
-    private void recibirTitulo() throws IOException {
+    private void recibirTitulo(AutorRepository repository) throws IOException {
         String URL_BASE = "https://gutendex.com/books/?search=";
         Scanner scanner = new Scanner(System.in);
         String titulo = scanner.nextLine();
@@ -54,7 +53,7 @@ public class Opciones {
             Optional<DatosLibro> libroBuscado = datos.libros().stream()
                     .findFirst();
             this.muestraLibro(libroBuscado);
-            this.guardarEnBD(libroBuscado, titulo);
+            this.guardarEnBD(libroBuscado, titulo, repository);
         } else {
             System.out.println("\uD83D\uDE41 lo sentimos, no se encontró ningún libro llamado: " + titulo);
         }
@@ -67,7 +66,9 @@ public class Opciones {
     }
 
 
-    private void guardarEnBD(Optional<DatosLibro> libroBuscado, String nombre) {
+    private void guardarEnBD(Optional<DatosLibro> libroBuscado, String nombre, AutorRepository repository) {
+
+
         System.out.println("Guardando en BD el titulo encontrado...");
         try {
             List<Libro> libroEncontrado = libroBuscado.stream().map(a -> new Libro(a)).collect(Collectors.toList());
@@ -78,14 +79,29 @@ public class Opciones {
                     .collect(Collectors.toList())
                     .stream().findFirst()
                     .get();
-            //
-//            Optional<Autor> autorBD = repository.buscarAutorPorNombre(
-//                    libroBuscado.get().
-//                            autores().stream()
-//                            .map(a -> a.nombre())
-//                            .collect(Collectors.joining()));
 
-            //System.out.println(autorBD);
+            Optional<Autor> autorBD = repository.buscarAutorPorNombre(
+                    libroBuscado.get().
+                            autores().stream()
+                            .map(a -> a.nombre())
+                            .collect(Collectors.joining()));
+
+            Optional<Libro> libroOptional = repository.buscarLibroPorNombre(nombre);
+            if (libroOptional.isPresent()) {
+                System.out.println("El libro ya está guardado en la BD.");
+            }
+            else {
+                Autor autor;
+                if (autorBD.isPresent()) {
+                    autor = autorBD.get();
+                    System.out.println("EL autor ya esta guardado en la BD");
+                } else {
+                    autor = autorAPI;
+                    repository.save(autor);
+                }
+                autor.setLibros(libroEncontrado);
+                repository.save(autor);
+            }
 
         } catch (Exception e) {
             System.out.println("Error! " + e.getMessage());
@@ -103,8 +119,20 @@ public class Opciones {
         System.out.print("Ingrese el título para buscarlo: ");
     }
 
-    public void listarLibros() {
+    public void listarLibros(AutorRepository repository) {
         this.encabezadoListarLibros();
+        List<Libro> libros = repository.buscarTodosLosLibros();
+        System.out.println("---------------------------------------------");
+        System.out.println("|| Titulo       Autor      Idioma     Descargas ||");
+        System.out.println("---------------------------------------------");
+        libros.forEach(l -> System.out.println(
+                            " || "+ l.getTitulo() + " || " +
+                            l.getAutor().getNombre() + " || "+
+                            l.getIdioma().getIdioma() + " || " +
+                            l.getDescargas()+ " || "
+        ));
+        System.out.println("---------------------------------------------");
+
     }
 
     private void encabezadoListarLibros() {
@@ -116,8 +144,19 @@ public class Opciones {
         System.out.println("╚════════════════════════════════════════════════════════╝");
     }
 
-    public void listarAutores() {
+    public void listarAutores(AutorRepository repository) {
         this.encabezadoListarAutores();
+        List<Autor> autores = repository.findAll();
+        System.out.println("----------------------------------------------------------");
+        System.out.println("|| Autor-Nombre       Fecha Nacimiento      Fecha Muerte ||");
+        System.out.println("----------------------------------------------------------");
+        autores.forEach(a -> System.out.println(
+                " || "+ a.getNombre() + " || " +
+                        a.getNacimiento() + " || "+
+                        a.getFallecimiento() + " || "
+        ));
+        System.out.println("---------------------------------------------");
+
 
     }
 

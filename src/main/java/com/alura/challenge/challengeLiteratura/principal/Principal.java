@@ -1,5 +1,6 @@
 package com.alura.challenge.challengeLiteratura.principal;
 
+
 import com.alura.challenge.challengeLiteratura.repository.AutorRepository;
 
 import java.io.IOException;
@@ -7,22 +8,21 @@ import java.util.Scanner;
 
 public class Principal {
 
-    private AutorRepository repository;
-    public Principal(AutorRepository repository){
-        this.repository = repository;
-    }
 
     Opciones opciones = new Opciones();
 
-    public void mostrarMenu() throws IOException {
-    
-        AutorRepository repository = this.repository;
+
+
+    public void mostrarMenu(AutorRepository repository) throws IOException {
+
+
         opciones.encabezado();
-        this.opciones();
+        this.opciones(repository);
     }
 
 
-    public void opciones() throws IOException {
+    public void opciones(AutorRepository repository) throws IOException {
+
         String opcion="0";
         Scanner scanner = new Scanner(System.in);
         //
@@ -36,15 +36,15 @@ public class Principal {
             {
                 case "1":
                     //System.out.println("Buscar libro por titulo.");
-                    opciones.buscarPorTitulo();
+                    opciones.buscarPorTitulo(repository);
                     break;
                 case "2":
                     //System.out.println("Listar libros registrados.");
-                    opciones.listarLibros();
+                    opciones.listarLibros(repository);
                     break;
                 case "3":
                     //System.out.println("Listar autores registrados.");
-                    opciones.listarAutores();
+                    opciones.listarAutores(repository);
                     break;
                 case "4":
                     //System.out.println("Listar autores vivos en determinado año.");
