@@ -1,9 +1,6 @@
 package com.alura.challenge.challengeLiteratura.principal;
 
-import com.alura.challenge.challengeLiteratura.model.Autor;
-import com.alura.challenge.challengeLiteratura.model.Datos;
-import com.alura.challenge.challengeLiteratura.model.DatosLibro;
-import com.alura.challenge.challengeLiteratura.model.Libro;
+import com.alura.challenge.challengeLiteratura.model.*;
 import com.alura.challenge.challengeLiteratura.repository.AutorRepository;
 import com.alura.challenge.challengeLiteratura.service.ConsumoAPI;
 import com.alura.challenge.challengeLiteratura.service.ConvierteDatos;
@@ -215,7 +212,7 @@ public class Opciones {
         System.out.print("Ingrese el año para buscar autores vivos en ese año: ");
     }
 
-    public void verIdiomas() {
+    public void verIdiomas(AutorRepository repository) {
         System.out.println("╔══════════════════════════════════════════════════════════╗");
         System.out.println("║             IDIOMAS DISPONIBLES                          ║");
         System.out.println("╠══════════════════════════════════════════════════════════╣");
@@ -223,9 +220,57 @@ public class Opciones {
         System.out.println("║ 2. Fr-Frances                                            ║");
         System.out.println("║ 3. En-Ingles                                             ║");
         System.out.println("║ 4. PT-Portugués                                          ║");
-        System.out.println("║ -------> 8. Volver sin listar                            ║");
         System.out.println("╚══════════════════════════════════════════════════════════╝");
-        System.out.print("Ingrese su opción: ");
+        System.out.print("Ingrese su opción: (1-4) ");
+        Scanner seleccion = new Scanner(System.in);
+        try {
+            var opcion = Integer.parseInt(seleccion.nextLine());
+            System.out.println("⌛ Buscando...");
+            switch (opcion) {
+                case 1:
+                    buscarLibrosPorIdioma("es", repository);
+                    break;
+                case 2:
+                    buscarLibrosPorIdioma("fr", repository);
+                    break;
+                case 3:
+                    buscarLibrosPorIdioma("en", repository);
+                    break;
+                case 4:
+                    buscarLibrosPorIdioma("pt", repository);
+                    break;
+                default:
+                    System.out.println("Opción inválida!");
+                    break;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Error!! Opción no válida (solo se aceptan numeros)");
+        }
+    }
+
+    private void buscarLibrosPorIdioma(String idioma, AutorRepository repository) {
+        try {
+            Idioma idiomaEnum = Idioma.valueOf(idioma.toUpperCase());
+            List<Libro> libros = repository.buscarLibrosPorIdioma(idiomaEnum);
+            if (libros.isEmpty()) {
+                System.out.println("No hay libros registrados en ese idioma");
+            }
+            else
+            {
+                System.out.println("---------------------------------------------");
+                System.out.println("|| Titulo       Autor      Idioma     Descargas ||");
+                System.out.println("---------------------------------------------");
+                libros.forEach(l -> System.out.println(
+                        " || "+ l.getTitulo() + " || " +
+                                l.getAutor().getNombre() + " || "+
+                                l.getIdioma().getIdioma() + " || " +
+                                l.getDescargas()+ " || "
+                ));
+                System.out.println("---------------------------------------------");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Solo son validos seleccionar del 1 al 4.");
+        }
     }
 
     public void muestreDespedida() {

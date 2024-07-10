@@ -52,7 +52,7 @@ public class Principal {
                     break;
                 case "5":
                     //System.out.println("Listar libros por idioma.");
-                    opciones.verIdiomas();
+                    opciones.verIdiomas(repository);
                     break;
                 case "8":
                     opciones.muestreDespedida();

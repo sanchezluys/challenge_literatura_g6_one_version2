@@ -97,6 +97,12 @@
 
 ### Menú 5 Listar libros por idioma de la BD
 
+![img.png](src/main/img/listarLibrosIdioma.png)
+
+#### Menu 5 Listar libros, validacion cuando seleccionan otro número o letra
+
+![img.png](menu5Validacion.png)
+
 ### Menú 8 Salir
 
 ![img.png](src/main/img/despedida.png)
@@ -116,18 +122,22 @@
 
 ### Mejoras y bugs pendientes por corregir
 
-| Item | Tipo   | Descripción                                                           | Propuesta                                            |
-|------|--------|-----------------------------------------------------------------------|------------------------------------------------------|
-| 1    | Mejora | Mostrar el idioma completo                                            | En vez de EN mostrar Ingles usando los alias en ENUM |
-|      |        |                                                                       |                                                      |
-| 2    | Bug    | Cuando un idioma o dato sea null                                      | Crear control para excepciones de este tipo          |
-|      |        |                                                                       |                                                      |
-| 3    | Bug    | Cuando el nombre del libro es mayor a 255 carateres da error          | Revisar los tipos de datos y actualizar              |
-|      |        |                                                                       |                                                      |
-| 4    | Mejora | Cuando un dato sea null cambiar por "Sin Informacion"                 | Agregar logica u código                              |
-|      |        |                                                                       |                                                      |
-| 5    | Mejora | Revisar Ortografia de todo el proyecto                                |                                                      |
-|      |        |                                                                       |                                                      |
-| 6    | Bug    | Agregar todos los Eumns de idiomas, al no extistir da error           | agregar excepcion cuando no exista el enum           |
-|      |        |                                                                       |                                                      |
-| 7    | Mejora | Colocar en los listado un numero consecutivo, al final decir el total |                                                      |
+| Item | Tipo   | Descripción                                                                     | Propuesta                                            |
+|------|--------|---------------------------------------------------------------------------------|------------------------------------------------------|
+| 1    | Mejora | Mostrar el idioma completo                                                      | En vez de EN mostrar Ingles usando los alias en ENUM |
+|      |        |                                                                                 |                                                      |
+| 2    | Bug    | Cuando un idioma o dato sea null                                                | Crear control para excepciones de este tipo          |
+|      |        |                                                                                 |                                                      |
+| 3    | Bug    | Cuando el nombre del libro es mayor a 255 carateres da error                    | Revisar los tipos de datos y actualizar              |
+|      |        |                                                                                 |                                                      |
+| 4    | Mejora | Cuando un dato sea null cambiar por "Sin Informacion"                           | Agregar logica u código                              |
+|      |        |                                                                                 |                                                      |
+| 5    | Mejora | Revisar Ortografia de todo el proyecto                                          |                                                      |
+|      |        |                                                                                 |                                                      |
+| 6    | Bug    | Agregar todos los Eumns de idiomas, al no extistir da error                     | agregar excepcion cuando no exista el enum           |
+|      |        |                                                                                 |                                                      |
+| 7    | Mejora | Colocar en los listado un numero consecutivo, al final decir el total           |                                                      |
+|      |        |                                                                                 |                                                      |
+| 8    | Mejora | Arreglar las tablas de las listas, con formato                                  |                                                      |
+|      |        |                                                                                 |                                                      |
+| 9    | Mejora | Al buscar un libro agregar la lista completa de los titulos conseguidos a la BD |                                                      |
