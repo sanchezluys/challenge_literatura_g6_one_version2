@@ -22,10 +22,10 @@ public class Opciones {
         System.out.println("║                         MENÚ                             ║");
         System.out.println("╠══════════════════════════════════════════════════════════╣");
         System.out.println("║ 1. Buscar libro por titulo con la API                    ║");
-        System.out.println("║ 2. Listar libros registrados                             ║");
-        System.out.println("║ 3. Listar autores registrados                            ║");
-        System.out.println("║ 4. Listar autores vivos en determinado año               ║");
-        System.out.println("║ 5. Listar libros por idioma                              ║");
+        System.out.println("║ 2. Listar libros registrados en BD                       ║");
+        System.out.println("║ 3. Listar autores registrados en BD                      ║");
+        System.out.println("║ 4. Listar autores vivos en determinado año en BD         ║");
+        System.out.println("║ 5. Listar libros por idioma de la BD                     ║");
         System.out.println("║ 8. Salir                                                 ║");
         System.out.println("╚══════════════════════════════════════════════════════════╝");
         System.out.print("Ingrese su opción: ");
@@ -142,6 +142,7 @@ public class Opciones {
         System.out.println("║ Se listarán los libros que estan registrados en la BD  ║");
         System.out.println("║                                                        ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
+        System.out.println("⌛ Buscando...");
     }
 
     public void listarAutores(AutorRepository repository) {
@@ -156,8 +157,6 @@ public class Opciones {
                         a.getFallecimiento() + " || "
         ));
         System.out.println("---------------------------------------------");
-
-
     }
 
     private void encabezadoListarAutores() {
@@ -167,15 +166,48 @@ public class Opciones {
         System.out.println("║ Se listarán los autores que esten registrados en la BD ║");
         System.out.println("║                                                        ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
+        System.out.println("⌛ Buscando....");
     }
 
-    public void listarAutoresVivosPorAno() {
+    public void listarAutoresVivosPorAno(AutorRepository repository) {
         this.encabezadoListarAutoresVivosPorAno();
+        this.recibirAno(repository);
+
+    }
+
+    private void recibirAno(AutorRepository repository) {
+        Scanner scanner = new Scanner(System.in);
+        Integer ano = null;
+        while (ano == null || ano < 1 || ano > 5000) {
+            //System.out.print("Ingrese el año para buscar autores vivos en ese año: ");
+            String input = scanner.nextLine();
+
+            try {
+                ano = Integer.parseInt(input);
+                if (ano < 1 || ano > 5000) {
+                    System.out.println("El año debe estar entre 1 y 5000.");
+                    ano = null;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, ingrese un número entero.");
+            }
+        }
+
+        List<Autor> autores = repository.buscarAutoresVivos(ano);
+        System.out.println("----------------------------------------------------------");
+        System.out.println("|| Autor-Nombre       Fecha Nacimiento      Fecha Muerte ||");
+        System.out.println("----------------------------------------------------------");
+        autores.forEach(a -> System.out.println(
+                " || "+ a.getNombre() + " || " +
+                        a.getNacimiento() + " || "+
+                        a.getFallecimiento() + " || "
+        ));
+        System.out.println("---------------------------------------------");
     }
 
     private void encabezadoListarAutoresVivosPorAno() {
         System.out.println("╔════════════════════════════════════════════════════════╗");
-        System.out.println("║           LISTA DE AUTORES VIVOS EN LA FECHA DEFINIDA  ║");
+        System.out.println("║ LISTA DE AUTORES VIVOS EN LA FECHA DEFINIDA POR USTED  ║");
         System.out.println("╠════════════════════════════════════════════════════════╣");
         System.out.println("║ Se listarán los autores que estan registrados en la BD ║");
         System.out.println("║ y esten vivos en un año especifico                     ║");
@@ -217,5 +249,4 @@ public class Opciones {
         System.out.println("║ Usando API de: http://gutendex.com/                      ║");
         System.out.println("╚══════════════════════════════════════════════════════════╝");
     }
-
 }

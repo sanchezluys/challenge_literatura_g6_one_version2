@@ -48,7 +48,7 @@ public class Principal {
                     break;
                 case "4":
                     //System.out.println("Listar autores vivos en determinado año.");
-                    opciones.listarAutoresVivosPorAno();
+                    opciones.listarAutoresVivosPorAno(repository);
                     break;
                 case "5":
                     //System.out.println("Listar libros por idioma.");

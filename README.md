@@ -75,7 +75,7 @@
 
 ![img.png](src/main/img/buscarLibroTitulo.png)
 
-#### Cuando no se encuentre el titulo
+#### Menu 1 Cuando no se encuentre el titulo, validación
 
 ![img.png](src/main/img/cuandoNoSeEncuentreTitulo.png)
 
@@ -88,6 +88,12 @@
 ![img.png](src/main/img/listadoAutoresBD.png)
 
 ### Menú 4 Listar autores vivos en determinado año en la BD
+
+![img.png](src/main/img/listadoAutoresVivos.png)
+
+#### Menu 4 se valida que sea un numero 1-5000, no acepta letras
+
+![img.png](src/main/img/validacionMenu4.png)
 
 ### Menú 5 Listar libros por idioma de la BD
 
